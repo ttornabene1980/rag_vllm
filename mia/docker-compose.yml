@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  weaviate-ui:
+     image: naaive/weaviate-ui:latest
+     environment:
+      - WEAVIATE_URL=http://weaviate:8080
+      - WEAVIATE_API_KEYS=secret
+     ports:
+       - "7777:7777"
+     depends_on:
+       - weaviate
+
   weaviate:
     command:
     - --host
@@ -60,7 +70,7 @@ services:
               capabilities: [gpu]
 volumes:
   weaviate_data:
-  
+
 networks:
   default:
     name: vllm-network
