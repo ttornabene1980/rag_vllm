@@ -1,37 +1,37 @@
 version: '3.8'
 
 services:
-  weaviate-ui:
-     image: naaive/weaviate-ui:latest
-     environment:
-      - WEAVIATE_URL=http://weaviate:8080
-      - WEAVIATE_API_KEYS=secret
-     ports:
-       - "7777:7777"
-     depends_on:
-       - weaviate
+  # weaviate-ui:
+  #    image: naaive/weaviate-ui:latest
+  #    environment:
+  #     - WEAVIATE_URL=http://weaviate:8080
+  #     - WEAVIATE_API_KEYS=secret
+  #    ports:
+  #      - "7777:7777"
+  #    depends_on:
+  #      - weaviate
 
-  weaviate:
-    command:
-    - --host
-    - 0.0.0.0
-    - --port
-    - '8080'
-    - --scheme
-    - http
-    image: cr.weaviate.io/semitechnologies/weaviate:1.32.8
-    ports:
-    - 8080:8080
-    - 50051:50051
-    volumes:
-    - weaviate_data:/var/lib/weaviate
-    restart: on-failure:0
-    environment:
-      QUERY_DEFAULTS_LIMIT: 25
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
-      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      ENABLE_API_BASED_MODULES: 'true'
-      CLUSTER_HOSTNAME: 'node1'
+  # weaviate:
+  #   command:
+  #   - --host
+  #   - 0.0.0.0
+  #   - --port
+  #   - '8080'
+  #   - --scheme
+  #   - http
+  #   image: cr.weaviate.io/semitechnologies/weaviate:1.32.8
+  #   ports:
+  #   - 8080:8080
+  #   - 50051:50051
+  #   volumes:
+  #   - weaviate_data:/var/lib/weaviate
+  #   restart: on-failure:0
+  #   environment:
+  #     QUERY_DEFAULTS_LIMIT: 25
+  #     AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+  #     PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+  #     ENABLE_API_BASED_MODULES: 'true'
+  #     CLUSTER_HOSTNAME: 'node1'
   vllm-deepseek:
     image: vllm/vllm-openai:latest
     container_name: vllm-deepseek-coder

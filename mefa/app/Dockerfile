@@ -11,5 +11,3 @@ WORKDIR /app
 COPY ./ /app
 
 RUN  uv pip install --system  -r pyproject.toml
- 
-# CMD ["bash"]

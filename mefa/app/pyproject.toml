@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest"]
+dev = ["pytest","watchdog"]
 
 [tool.uv.workspace]
 members = [
