@@ -25,6 +25,17 @@ if st.button("Generate"):
     except Exception as e:
         st.error(f"⚠️ API error: {e}")
 
+st.title("⚡ VLLM Sql Agent")
+query2 = st.text_input("Describe the db question you want:", "list all tables")
+if st.button("GenerateSql"):
+    try:
+        res = requests.get(f"{API_URL}/sql-agent", params={"query": query2}).json()
+        st.subheader("📝 SQL Agent Response")
+        st.json(res)
+
+    except Exception as e:
+        st.error(f"⚠️ API error: {e}")
+        
 # if st.button("Generate"):
 #     # with col1:
 #         st.subheader("LangChain Result")
