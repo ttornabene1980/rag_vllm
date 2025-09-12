@@ -1,0 +1,25 @@
+[project]
+name = "mefa_flowai"
+version = "1.0.0"
+dependencies = [
+     "fastapi",
+    "langchain",
+     "langchain_community",
+     "langchain-openai",
+    "streamlit",
+    "uvicorn",
+    "dspy-ai",
+    "beautifulsoup4",
+    "lxml==5.2.2",
+"psycopg2-binary==2.9.9",
+ "guardrails-ai",
+   
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv.workspace]
+members = [
+    "app",
+]

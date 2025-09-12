@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  vllm-deepseek:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-deepseek-coder
+    runtime: nvidia
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - /tmp:/tmp
+    command: [
+      "--model", "deepseek-ai/deepseek-coder-1.3b-instruct",
+      "--host", "0.0.0.0",
+      "--port", "8000",
+      "--served-model-name", "deepseek-coder-1.3b-instruct",
+      "--max-model-len", "4096",
+      "--gpu-memory-utilization", "0.90",
+      "--dtype", "half",
+      "--max-num-seqs", "8",
+      "--tensor-parallel-size", "1",
+      "--pipeline-parallel-size", "1",
+      "--block-size", "16",
+      "--disable-log-stats",
+      "--trust-remote-code",
+      "--max-num-batched-tokens", "2048"
+    ]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+networks:
+  default:
+    name: vllm-network

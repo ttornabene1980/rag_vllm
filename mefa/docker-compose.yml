@@ -1,0 +1,24 @@
+services:
+  orchestrator:
+    build: ./app
+    container_name: orchestrator
+    volumes:
+      - ./app:/app
+    ports:
+      - "8001:8000"
+    # command: ls -la
+    command:  uvicorn main:app --host 0.0.0.0 --port 8000
+  # streamlit:
+  #   build: ./app
+  #   container_name: streamlit-ui
+  #   volumes:
+  #     - ./app:/app
+  #   ports:
+  #     - "8501:8501"
+  #   depends_on:
+  #     - orchestrator
+  #   command: streamlit run ui.py --server.port=8501 --server.address=0.0.0.0
+ 
+networks:
+  default:
+    name: vllm-network2
