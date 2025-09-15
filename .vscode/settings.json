@@ -1,0 +1,7 @@
+{
+  "python.defaultInterpreterPath": "./mefa/.mefaenv/bin/python",
+  "python.analysis.extraPaths": [
+    "mefa"  // if you have local modules like mefa.dashboard
+  ],
+  "python.analysis.typeCheckingMode": "basic"  // or "off" if too strict
+}d
